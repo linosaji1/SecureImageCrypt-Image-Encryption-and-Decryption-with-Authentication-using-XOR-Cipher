@@ -15,7 +15,7 @@ pip install mysql-connector-python
 * Open a terminal or command prompt.
 * Navigate to the directory where your Python script is located.
 * Run the script by executing the following command:
-	  *python image_enc.py
+	* python image_enc.py
 * Upon running the script, a GUI window will appear for authentication.
 * Enter the username and password. This will be validated against the MySQL database.
 * If the authentication succeeds, another window will appear for image encryption and decryption.
