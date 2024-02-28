@@ -13,6 +13,7 @@ class ImageEncryptor:
         self.root.withdraw()
         self.entry1 = None
         self.entry2 = None
+        self.login = None
 
     def encrypt_image(self):
         key = self._generate_key()
