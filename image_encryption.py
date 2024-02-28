@@ -14,6 +14,8 @@ class ImageEncryptor:
         self.entry1 = None
         self.entry2 = None
         self.login = None
+        self.u = None
+        self.p = None
 
     def encrypt_image(self):
         key = self._generate_key()
