@@ -7,7 +7,9 @@
 * Threading is used to perform encryption/decryption operations asynchronously.
 
 # Requirements
-* pip install mysql-connector-python
+```
+pip install mysql-connector-python
+```
 
 # How to Run
 * Open a terminal or command prompt.
