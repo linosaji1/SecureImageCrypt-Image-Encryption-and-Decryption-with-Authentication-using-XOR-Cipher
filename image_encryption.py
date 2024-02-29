@@ -92,8 +92,7 @@ class ImageEncryptor:
         def decrypt_file(file_name, key):
             try:
                 with open(file_name, 'rb') as fi:
-                    # Skip the header or metadata
-                    fi.seek(10)
+                    fi.seek(10) #Skip the header or metadata
                     image = bytearray(fi.read())
                 for index, values in enumerate(image):
                     image[index] = (values ^ int(key)) % 256
