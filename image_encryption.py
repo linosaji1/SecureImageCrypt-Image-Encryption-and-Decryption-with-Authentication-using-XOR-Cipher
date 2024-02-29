@@ -37,7 +37,10 @@ class ImageEncryptor:
             file1 = filedialog.askopenfile(mode='r', filetypes=[('jpg file', '*.jpg')])
             if file1 is not None:
                 file_name = file1.name
-                self._decrypt_file(file_name, key)
+                if not self._is_encrypted(file_name):
+                    messagebox.showerror("Error", "Selected image is not encrypted.")
+                else:
+                    self._decrypt_file(file_name, key)
             else:
                 messagebox.showerror("Error", "Please Select an image")
 
