@@ -112,8 +112,8 @@ class ImageEncryptor:
                 db=mysql.connector.connect(
                     host="localhost",
                     user="root", #Enter User Name
-                    password="Lino123@", #Enter Password
-                    database="auth" #Enter database 
+                    password="", #Enter Password
+                    database="" #Enter database 
                 )
                 cursor=db.cursor()
                 cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s",(username,password))
