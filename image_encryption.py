@@ -3,6 +3,7 @@ from tkinter import simpledialog, messagebox, filedialog
 import mysql.connector
 import threading
 import sys
+import os
 
 class ImageEncryptor:
     def __init__(self):
@@ -23,7 +24,10 @@ class ImageEncryptor:
             file1 = filedialog.askopenfile(mode='r', filetypes=[('jpg file', '*.jpg')])
             if file1 is not None:
                 file_name = file1.name
-                self._encrypt_file(file_name, key)
+                if self._is_encrypted(file_name):
+                    messagebox.showerror("Error", "Selected image is already encrypted.")
+                else:
+                    self._encrypt_file(file_name, key)
             else:
                 messagebox.showerror("Error", "Please Select an image")
 
@@ -36,6 +40,11 @@ class ImageEncryptor:
                 self._decrypt_file(file_name, key)
             else:
                 messagebox.showerror("Error", "Please Select an image")
+
+    def _is_encrypted(self, file_name):
+        with open(file_name, 'rb') as fi:
+            header = fi.read(10)
+            return header == b'ENCRYPTED\n'
 
     def _generate_key(self):
         key1 = self.entry1.get("1.0", "end-1c")
@@ -71,6 +80,7 @@ class ImageEncryptor:
                 for index, values in enumerate(image):
                     image[index] = (values ^ int(key)) % 256
                 with open(file_name, 'wb') as fi1:
+                    fi1.write(b'ENCRYPTED\n') # Write a header or metadata to identify encryption
                     fi1.write(image)
                 print("Saved image as : ", file_name, "and with", key, "as key")
             except Exception as e:
@@ -82,6 +92,8 @@ class ImageEncryptor:
         def decrypt_file(file_name, key):
             try:
                 with open(file_name, 'rb') as fi:
+                    # Skip the header or metadata
+                    fi.seek(10)
                     image = bytearray(fi.read())
                 for index, values in enumerate(image):
                     image[index] = (values ^ int(key)) % 256
@@ -100,8 +112,8 @@ class ImageEncryptor:
                 db=mysql.connector.connect(
                     host="localhost",
                     user="root", #Enter User Name
-                    password="", #Enter Password
-                    database="" #Enter database 
+                    password="Lino123@", #Enter Password
+                    database="auth" #Enter database 
                 )
                 cursor=db.cursor()
                 cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s",(username,password))
