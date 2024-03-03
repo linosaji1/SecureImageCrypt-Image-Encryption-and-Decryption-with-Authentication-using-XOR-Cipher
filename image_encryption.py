@@ -68,7 +68,7 @@ class ImageEncryptor:
             img = Image.open(file_name)
             img.verify()
             return False
-        except (IOError, SyntaxError):
+        except Exception:
             # If an error occurs, the image is encrypted
             return True
         
