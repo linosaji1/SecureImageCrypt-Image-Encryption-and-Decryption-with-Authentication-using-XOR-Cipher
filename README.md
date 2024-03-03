@@ -10,6 +10,9 @@
 ```
 pip install mysql-connector-python
 ```
+```
+pip install pillow
+```
 
 # How to Run
 * Open a terminal or command prompt.
